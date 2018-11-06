@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# This builds the client
+./swagger-codegen generate \
+  -i $1 \
+  --api-package com.instructure.canvas.api \
+  --model-package com.instructure.canvas.model \
+  --invoker-package com.instructure.canvas.invoker \
+  --group-id uk.ac.ox.it \
+  --artifact-id canvas-api-client-feign \
+  --artifact-version 1.0-SNAPSHOT \
+  -l java \
+  --library feign \
+  -t feign-templates \
+  -Djava8=true \
+  -DapiDocs=false
