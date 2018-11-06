@@ -9,6 +9,20 @@
   "schemes": [
     "https"
   ],
+  "parameters": {
+    "as_user_id": {
+      "description": "Act as another user",
+      "in": "query",
+      "required": false,
+      "type": "string"
+    },
+    "per_page": {
+      "description": "Items to display per page",
+      "in": "query",
+      "required": false,
+      "type": "integer"
+    }
+  },
   "paths": {
     "/lti/assignments/{assignment_id}": {
       "get": {
@@ -1876,7 +1890,7 @@
           {
             "description": "Other file upload properties, See {file:file_uploads.html File Upload\nDocumentation}",
             "in": "formData",
-            "name": "pre_attachment[*]",
+            "name": "pre_attachment[todo]",
             "required": false,
             "type": "string"
           },
@@ -5389,35 +5403,35 @@
           {
             "description": "no description",
             "in": "formData",
-            "name": "permissions[<X>][explicit]",
+            "name": "permissions[X][explicit]",
             "required": false,
             "type": "boolean"
           },
           {
             "description": "If explicit is 1 and enabled is 1, permission <X> will be explicitly\ngranted to this role. If explicit is 1 and enabled has any other value\n(typically 0), permission <X> will be explicitly denied to this role. If\nexplicit is any other value (typically 0) or absent, or if enabled is\nabsent, the value for permission <X> will be inherited from upstream.\nIgnored if permission <X> is locked upstream (in an ancestor account).\n\nMay occur multiple times with unique values for <X>. Recognized\npermission names for <X> are:\n\n  [For Account-Level Roles Only]\n  become_user                      -- Become other users\n  import_sis                       -- Import SIS data\n  manage_account_memberships       -- Add/remove other admins for the account\n  manage_account_settings          -- Manage account-level settings\n  manage_alerts                    -- Manage global alerts\n  manage_courses                   -- Manage ( add / edit / delete ) courses\n  manage_developer_keys            -- Manage developer keys\n  manage_global_outcomes           -- Manage learning outcomes\n  manage_jobs                      -- Manage background jobs\n  manage_role_overrides            -- Manage permissions\n  manage_storage_quotas            -- Set storage quotas for courses, groups, and users\n  manage_sis                       -- Manage SIS data\n  manage_site_settings             -- Manage site-wide and plugin settings\n  manage_user_logins               -- Modify login details for users\n  read_course_content              -- View course content\n  read_course_list                 -- View the list of courses\n  read_messages                    -- View notifications sent to users\n  site_admin                       -- Use the Site Admin section and admin all other accounts\n  view_error_reports               -- View error reports\n  view_statistics                  -- View statistics\n  manage_feature_flags             -- Enable or disable features at an account level\n\n  [For both Account-Level and Course-Level roles]\n   Note: Applicable enrollment types for course-level roles are given in brackets:\n         S = student, T = teacher, A = TA, D = designer, O = observer.\n         Lower-case letters indicate permissions that are off by default.\n         A missing letter indicates the permission cannot be enabled for the role\n         or any derived custom roles.\n  change_course_state              -- [ TaD ] Change course state\n  comment_on_others_submissions    -- [sTAD ] View all students' submissions and make comments on them\n  create_collaborations            -- [STADo] Create student collaborations\n  create_conferences               -- [STADo] Create web conferences\n  import_outcomes                  -- [ TaDo] Import outcome data\n  manage_admin_users               -- [ Tad ] Add/remove other teachers, course designers or TAs to the course\n  manage_assignments               -- [ TADo] Manage (add / edit / delete) assignments and quizzes\n  manage_calendar                  -- [sTADo] Add, edit and delete events on the course calendar\n  manage_content                   -- [ TADo] Manage all other course content\n  manage_files                     -- [ TADo] Manage (add / edit / delete) course files\n  manage_grades                    -- [ TA  ] Edit grades\n  manage_groups                    -- [ TAD ] Manage (create / edit / delete) groups\n  manage_interaction_alerts        -- [ Ta  ] Manage alerts\n  manage_outcomes                  -- [sTaDo] Manage learning outcomes\n  manage_sections                  -- [ TaD ] Manage (create / edit / delete) course sections\n  manage_students                  -- [ TAD ] Add/remove students for the course\n  manage_user_notes                -- [ TA  ] Manage faculty journal entries\n  manage_rubrics                   -- [ TAD ] Edit assessing rubrics\n  manage_wiki                      -- [ TADo] Manage (add / edit / delete) pages\n  read_forum                       -- [STADO] View discussions\n  moderate_forum                   -- [sTADo] Moderate discussions (delete/edit others' posts, lock topics)\n  post_to_forum                    -- [STADo] Post to discussions\n  create_forum                     -- [STADo] Create discussions\n  read_announcements               -- [STADO] View announcements\n  read_question_banks              -- [ TADo] View and link to question banks\n  read_reports                     -- [ TAD ] View usage reports for the course\n  read_roster                      -- [STADo] See the list of users\n  read_sis                         -- [sTa  ] Read SIS data\n  send_messages                    -- [STADo] Send messages to individual course members\n  send_messages_all                -- [sTADo] Send messages to the entire class\n  view_all_grades                  -- [ TAd ] View all grades\n  view_group_pages                 -- [sTADo] View the group pages of all student groups\n  lti_add_edit                     -- [ TAD ] LTI add and edit\n  read_email_addresses             -- [sTAdo] See other users' primary email address\n  view_user_logins                 -- [ TA  ] View login ids for users\n  generate_observer_pairing_code   -- [ tAdo] Allow observer pairing code generation\n\nSome of these permissions are applicable only for roles on the site admin\naccount, on a root account, or for course-level roles with a particular base role type;\nif a specified permission is inapplicable, it will be ignored.\n\nAdditional permissions may exist based on installed plugins.",
             "in": "formData",
-            "name": "permissions[<X>][enabled]",
+            "name": "permissions[X][enabled]",
             "required": false,
             "type": "boolean"
           },
           {
             "description": "If the value is 1, permission <X> will be locked downstream (new roles in\nsubaccounts cannot override the setting). For any other value, permission\n<X> is left unlocked. Ignored if permission <X> is already locked\nupstream. May occur multiple times with unique values for <X>.",
             "in": "formData",
-            "name": "permissions[<X>][locked]",
+            "name": "permissions[X][locked]",
             "required": false,
             "type": "boolean"
           },
           {
             "description": "If the value is 1, permission <X> applies to the account this role is in.\nThe default value is 1. Must be true if applies_to_descendants is false.\nThis value is only returned if enabled is true.",
             "in": "formData",
-            "name": "permissions[<X>][applies_to_self]",
+            "name": "permissions[X][applies_to_self]",
             "required": false,
             "type": "boolean"
           },
           {
             "description": "If the value is 1, permission <X> cascades down to sub accounts of the\naccount this role is in. The default value is 1.  Must be true if\napplies_to_self is false.This value is only returned if enabled is true.",
             "in": "formData",
-            "name": "permissions[<X>][applies_to_descendants]",
+            "name": "permissions[X][applies_to_descendants]",
             "required": false,
             "type": "boolean"
           }
@@ -5571,28 +5585,28 @@
           {
             "description": "no description",
             "in": "formData",
-            "name": "permissions[<X>][explicit]",
+            "name": "permissions[X][explicit]",
             "required": false,
             "type": "boolean"
           },
           {
             "description": "These arguments are described in the documentation for the\n{api:RoleOverridesController#add_role add_role method}.",
             "in": "formData",
-            "name": "permissions[<X>][enabled]",
+            "name": "permissions[X][enabled]",
             "required": false,
             "type": "boolean"
           },
           {
             "description": "If the value is 1, permission <X> applies to the account this role is in.\nThe default value is 1. Must be true if applies_to_descendants is false.\nThis value is only returned if enabled is true.",
             "in": "formData",
-            "name": "permissions[<X>][applies_to_self]",
+            "name": "permissions[X][applies_to_self]",
             "required": false,
             "type": "boolean"
           },
           {
             "description": "If the value is 1, permission <X> cascades down to sub accounts of the\naccount this role is in. The default value is 1.  Must be true if\napplies_to_self is false.This value is only returned if enabled is true.",
             "in": "formData",
-            "name": "permissions[<X>][applies_to_descendants]",
+            "name": "permissions[X][applies_to_descendants]",
             "required": false,
             "type": "boolean"
           }
@@ -11972,42 +11986,42 @@
           {
             "description": "See documentation for the posted_grade argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
             "in": "formData",
-            "name": "grade_data[<student_id>][posted_grade]",
+            "name": "grade_data[student_id][posted_grade]",
             "required": false,
             "type": "string"
           },
           {
             "description": "See documentation for the excuse argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
             "in": "formData",
-            "name": "grade_data[<student_id>][excuse]",
+            "name": "grade_data[student_id][excuse]",
             "required": false,
             "type": "boolean"
           },
           {
             "description": "See documentation for the rubric_assessment argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
             "in": "formData",
-            "name": "grade_data[<student_id>][rubric_assessment]",
+            "name": "grade_data[student_id][rubric_assessment]",
             "required": false,
             "type": "RubricAssessment"
           },
           {
             "description": "no description",
             "in": "formData",
-            "name": "grade_data[<student_id>][text_comment]",
+            "name": "grade_data[student_id][text_comment]",
             "required": false,
             "type": "string"
           },
           {
             "description": "no description",
             "in": "formData",
-            "name": "grade_data[<student_id>][group_comment]",
+            "name": "grade_data[student_id][group_comment]",
             "required": false,
             "type": "boolean"
           },
           {
             "description": "no description",
             "in": "formData",
-            "name": "grade_data[<student_id>][media_comment_id]",
+            "name": "grade_data[student_id][media_comment_id]",
             "required": false,
             "type": "string"
           },
@@ -12018,7 +12032,7 @@
               "video"
             ],
             "in": "formData",
-            "name": "grade_data[<student_id>][media_comment_type]",
+            "name": "grade_data[student_id][media_comment_type]",
             "required": false,
             "type": "string"
           },
@@ -12029,7 +12043,7 @@
             "items": {
               "type": "integer"
             },
-            "name": "grade_data[<student_id>][file_ids]",
+            "name": "grade_data[student_id][file_ids]",
             "required": false,
             "type": "array"
           },
@@ -12037,7 +12051,7 @@
             "description": "Specifies which assignment to grade.  This argument is not necessary when\nusing the assignment-specific endpoints.",
             "format": "int64",
             "in": "formData",
-            "name": "grade_data[<student_id>][assignment_id]",
+            "name": "grade_data[student_id][assignment_id]",
             "required": false,
             "type": "integer"
           }
@@ -14065,7 +14079,7 @@
           {
             "description": "Other file upload properties, See {file:file_uploads.html File Upload\nDocumentation}",
             "in": "formData",
-            "name": "pre_attachment[*]",
+            "name": "pre_attachment[todo]",
             "required": false,
             "type": "string"
           },
@@ -24817,42 +24831,42 @@
           {
             "description": "See documentation for the posted_grade argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
             "in": "formData",
-            "name": "grade_data[<student_id>][posted_grade]",
+            "name": "grade_data[student_id][posted_grade]",
             "required": false,
             "type": "string"
           },
           {
             "description": "See documentation for the excuse argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
             "in": "formData",
-            "name": "grade_data[<student_id>][excuse]",
+            "name": "grade_data[student_id][excuse]",
             "required": false,
             "type": "boolean"
           },
           {
             "description": "See documentation for the rubric_assessment argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
             "in": "formData",
-            "name": "grade_data[<student_id>][rubric_assessment]",
+            "name": "grade_data[student_id][rubric_assessment]",
             "required": false,
             "type": "RubricAssessment"
           },
           {
             "description": "no description",
             "in": "formData",
-            "name": "grade_data[<student_id>][text_comment]",
+            "name": "grade_data[student_id][text_comment]",
             "required": false,
             "type": "string"
           },
           {
             "description": "no description",
             "in": "formData",
-            "name": "grade_data[<student_id>][group_comment]",
+            "name": "grade_data[student_id][group_comment]",
             "required": false,
             "type": "boolean"
           },
           {
             "description": "no description",
             "in": "formData",
-            "name": "grade_data[<student_id>][media_comment_id]",
+            "name": "grade_data[student_id][media_comment_id]",
             "required": false,
             "type": "string"
           },
@@ -24863,7 +24877,7 @@
               "video"
             ],
             "in": "formData",
-            "name": "grade_data[<student_id>][media_comment_type]",
+            "name": "grade_data[student_id][media_comment_type]",
             "required": false,
             "type": "string"
           },
@@ -24874,7 +24888,7 @@
             "items": {
               "type": "integer"
             },
-            "name": "grade_data[<student_id>][file_ids]",
+            "name": "grade_data[student_id][file_ids]",
             "required": false,
             "type": "array"
           },
@@ -24882,7 +24896,7 @@
             "description": "Specifies which assignment to grade.  This argument is not necessary when\nusing the assignment-specific endpoints.",
             "format": "int64",
             "in": "formData",
-            "name": "grade_data[<student_id>][assignment_id]",
+            "name": "grade_data[student_id][assignment_id]",
             "required": false,
             "type": "integer"
           }
@@ -27472,7 +27486,7 @@
           "200": {
             "description": "No response was specified",
             "schema": {
-              "$ref": "#/definitions/GroupMembership | Progress"
+              "$ref": "#/definitions/GroupMembership"
             }
           }
         },
@@ -28249,7 +28263,7 @@
           {
             "description": "Other file upload properties, See {file:file_uploads.html File Upload\nDocumentation}",
             "in": "formData",
-            "name": "pre_attachment[*]",
+            "name": "pre_attachment[todo]",
             "required": false,
             "type": "string"
           },
@@ -34069,42 +34083,42 @@
           {
             "description": "See documentation for the posted_grade argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
             "in": "formData",
-            "name": "grade_data[<student_id>][posted_grade]",
+            "name": "grade_data[student_id][posted_grade]",
             "required": false,
             "type": "string"
           },
           {
             "description": "See documentation for the excuse argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
             "in": "formData",
-            "name": "grade_data[<student_id>][excuse]",
+            "name": "grade_data[student_id][excuse]",
             "required": false,
             "type": "boolean"
           },
           {
             "description": "See documentation for the rubric_assessment argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
             "in": "formData",
-            "name": "grade_data[<student_id>][rubric_assessment]",
+            "name": "grade_data[student_id][rubric_assessment]",
             "required": false,
             "type": "RubricAssessment"
           },
           {
             "description": "no description",
             "in": "formData",
-            "name": "grade_data[<student_id>][text_comment]",
+            "name": "grade_data[student_id][text_comment]",
             "required": false,
             "type": "string"
           },
           {
             "description": "no description",
             "in": "formData",
-            "name": "grade_data[<student_id>][group_comment]",
+            "name": "grade_data[student_id][group_comment]",
             "required": false,
             "type": "boolean"
           },
           {
             "description": "no description",
             "in": "formData",
-            "name": "grade_data[<student_id>][media_comment_id]",
+            "name": "grade_data[student_id][media_comment_id]",
             "required": false,
             "type": "string"
           },
@@ -34115,7 +34129,7 @@
               "video"
             ],
             "in": "formData",
-            "name": "grade_data[<student_id>][media_comment_type]",
+            "name": "grade_data[student_id][media_comment_type]",
             "required": false,
             "type": "string"
           },
@@ -34126,7 +34140,7 @@
             "items": {
               "type": "integer"
             },
-            "name": "grade_data[<student_id>][file_ids]",
+            "name": "grade_data[student_id][file_ids]",
             "required": false,
             "type": "array"
           },
@@ -34134,7 +34148,7 @@
             "description": "Specifies which assignment to grade.  This argument is not necessary when\nusing the assignment-specific endpoints.",
             "format": "int64",
             "in": "formData",
-            "name": "grade_data[<student_id>][assignment_id]",
+            "name": "grade_data[student_id][assignment_id]",
             "required": false,
             "type": "integer"
           }
@@ -35079,42 +35093,42 @@
           {
             "description": "See documentation for the posted_grade argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
             "in": "formData",
-            "name": "grade_data[<student_id>][posted_grade]",
+            "name": "grade_data[student_id][posted_grade]",
             "required": false,
             "type": "string"
           },
           {
             "description": "See documentation for the excuse argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
             "in": "formData",
-            "name": "grade_data[<student_id>][excuse]",
+            "name": "grade_data[student_id][excuse]",
             "required": false,
             "type": "boolean"
           },
           {
             "description": "See documentation for the rubric_assessment argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
             "in": "formData",
-            "name": "grade_data[<student_id>][rubric_assessment]",
+            "name": "grade_data[student_id][rubric_assessment]",
             "required": false,
             "type": "RubricAssessment"
           },
           {
             "description": "no description",
             "in": "formData",
-            "name": "grade_data[<student_id>][text_comment]",
+            "name": "grade_data[student_id][text_comment]",
             "required": false,
             "type": "string"
           },
           {
             "description": "no description",
             "in": "formData",
-            "name": "grade_data[<student_id>][group_comment]",
+            "name": "grade_data[student_id][group_comment]",
             "required": false,
             "type": "boolean"
           },
           {
             "description": "no description",
             "in": "formData",
-            "name": "grade_data[<student_id>][media_comment_id]",
+            "name": "grade_data[student_id][media_comment_id]",
             "required": false,
             "type": "string"
           },
@@ -35125,7 +35139,7 @@
               "video"
             ],
             "in": "formData",
-            "name": "grade_data[<student_id>][media_comment_type]",
+            "name": "grade_data[student_id][media_comment_type]",
             "required": false,
             "type": "string"
           },
@@ -35136,7 +35150,7 @@
             "items": {
               "type": "integer"
             },
-            "name": "grade_data[<student_id>][file_ids]",
+            "name": "grade_data[student_id][file_ids]",
             "required": false,
             "type": "array"
           },
@@ -35144,7 +35158,7 @@
             "description": "Specifies which assignment to grade.  This argument is not necessary when\nusing the assignment-specific endpoints.",
             "format": "int64",
             "in": "formData",
-            "name": "grade_data[<student_id>][assignment_id]",
+            "name": "grade_data[student_id][assignment_id]",
             "required": false,
             "type": "integer"
           }
@@ -35537,7 +35551,7 @@
           "200": {
             "description": "No response was specified",
             "schema": {
-              "$ref": "#/definitions/{success: true}"
+              "$ref": "#/definitions/SuccessTrue"
             }
           }
         },
@@ -35607,7 +35621,7 @@
           {
             "description": "The desired frequency for <X> notification",
             "in": "formData",
-            "name": "notification_preferences[<X>][frequency]",
+            "name": "notification_preferences[X][frequency]",
             "required": true,
             "type": "string"
           }
@@ -35691,7 +35705,7 @@
           {
             "description": "The desired frequency for <X> notification",
             "in": "formData",
-            "name": "notification_preferences[<X>][frequency]",
+            "name": "notification_preferences[X][frequency]",
             "required": true,
             "type": "string"
           }
@@ -37475,7 +37489,7 @@
           {
             "description": "Other file upload properties, See {file:file_uploads.html File Upload\nDocumentation}",
             "in": "formData",
-            "name": "pre_attachment[*]",
+            "name": "pre_attachment[todo]",
             "required": false,
             "type": "string"
           },
@@ -41418,6 +41432,31 @@
           "type": "string"
         }
       }
+    },
+    "ContextExternalTool": {
+      "properties": {
+        "id": {
+          "description": "The unique identifier for the tool",
+          "type": "integer"
+        },
+        "domain": {
+          "description": "The domain to match links against",
+          "type": "string"
+        },
+        "url": {
+          "description": "The url to match links against",
+          "type": "string"
+        },
+        "consumer_key": {
+          "description": "The consumer key used by the tool (The associated shared secret is not returned)",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the tool",
+          "type": "string"
+        }
+      }
+
     },
     "Conversation": {
       "properties": {
@@ -47783,6 +47822,13 @@
           "description": "the state of the submission at this version",
           "example": "unsubmitted",
           "type": "string"
+        }
+      }
+    },
+    "SuccessTrue": {
+      "properties": {
+        "success": {
+          "type": "boolean"
         }
       }
     },
