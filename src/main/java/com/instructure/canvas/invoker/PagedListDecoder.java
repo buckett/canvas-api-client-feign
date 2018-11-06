@@ -31,19 +31,21 @@ public class PagedListDecoder implements Decoder {
             // Is there a better way?
             if (type instanceof ParameterizedType) {
                 ParameterizedType parameterizedType = (ParameterizedType)type;
-                if (List.class.getName().equals(parameterizedType.getRawType().getTypeName())) {
+                if (decoded instanceof List && List.class.getName().equals(parameterizedType.getRawType().getTypeName())) {
+                    List decodedList = (List)decoded;
                     // Should be dealing with paging.
                     try {
                         LinkHeaderParser parser = new LinkHeaderParser();
                         response.headers().get("Link").forEach(parser::parse);
-                        PagedList pagedList = new PagedList((List) decoded,
+                        
+                        @SuppressWarnings("unchecked")
+                        PagedList<Object> pagedList = new PagedList<Object>(decodedList,
                                 parser.getType(FIRST),
                                 parser.getType(PREV),
                                 parser.getType(CURRENT),
                                 parser.getType(NEXT),
                                 parser.getType(LAST)
                         );
-
 
                         // How to deal with all the other stuf in feign (retry, interceptors, etc).
                         return pagedList;
