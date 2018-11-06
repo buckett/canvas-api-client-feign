@@ -6,12 +6,12 @@
   <packaging>jar</packaging>
   <name>canvas-api-client-feign</name>
   <version>1.0-SNAPSHOT</version>
-  <url>https://github.com/swagger-api/swagger-codegen</url>
+  <url>https://github.com/buckett/canvas-api-client-feign</url>
   <description>Swagger Java</description>
   <scm>
-    <connection>scm:git:git@github.com:swagger-api/swagger-codegen.git</connection>
-    <developerConnection>scm:git:git@github.com:swagger-api/swagger-codegen.git</developerConnection>
-    <url>https://github.com/swagger-api/swagger-codegen</url>
+    <connection>scm:git:git@github.com:buckett/canvas-api-client-feign.git</connection>
+    <developerConnection>scm:git:git@github.com:buckett/canvas-api-client-feign.git</developerConnection>
+    <url>https://github.com/buckett/canvas-api-client-feign</url>
   </scm>
   <licenses>
     <license>
