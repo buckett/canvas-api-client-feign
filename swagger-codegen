@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# Simple script to download swagger-codegen from maven repo and then run it.
+
+# Fail on error
+set -e 
+
+version=3.0.2
+group_id=io.swagger.codegen.v3
+artifact_id=swagger-codegen-cli
+
+m2_repo=$HOME/.m2/repository
+
+jar=${m2_repo}/${group_id//\./\//}/${artifact_id}/${version}/${artifact_id}-${version}.jar
+if [ \! -f ${jar} ]; then
+   # Download the file and it's dependencies
+   mvn dependency:get -Dartifact="${group_id}:${artifact_id}:${version}"
+fi
+
+java -jar $jar $*
