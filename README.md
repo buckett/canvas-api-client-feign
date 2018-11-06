@@ -4,6 +4,19 @@
 
 Building the API client library requires [Maven](https://maven.apache.org/) to be installed.
 
+## Generated
+
+Most of this project's source code is generated from the swagger source. To re-generate the files run:
+
+```shell
+./build-client canvas-swagger2.json
+```
+
+This uses templates in `feign-template` to build the files. These were copied from [swagger-codegen](https://github.com/swagger-api/swagger-codegen) and then patched to support the pagination through the link header that we need for the canvas API.
+
+The first generate of this project used swagger-codegen, however it appears that the community has split and more up to date 
+versions of the codebase are in [openapi-generator](https://github.com/OpenAPITools/openapi-generator).
+
 ## Installation & Usage
 
 To install the API client library to your local Maven repository, simply execute:
