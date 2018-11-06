@@ -34,7 +34,7 @@ import com.instructure.canvas.invoker.auth.OAuth.AccessTokenListener;
     apiAuthorizations = new LinkedHashMap<String, RequestInterceptor>();
     feignBuilder = Feign.builder()
                 .encoder(new FormEncoder(new JacksonEncoder(objectMapper)))
-                .decoder(new JacksonDecoder(objectMapper))
+                .decoder(new PagedListDecoder(new JacksonDecoder(objectMapper)))
                 .logger(new Slf4jLogger());
   }
 
